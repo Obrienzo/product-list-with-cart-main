@@ -30,6 +30,11 @@ button {
     outline: none;
     border: none;
     background-color: transparent;
+    cursor: pointer;
+}
+
+img {
+    max-width: 100%;
 }
 
 @font-face {
@@ -41,10 +46,146 @@ body {
     font-family: 'Red Hat';
     line-height: 1.5;
     font-weight: var(--font-400);
-    display: flex;
-    justify-content: center;
+    font-size: 1.6rem;
 }
 
 #app {
-    padding: ;
+    background-color: var(--Rose-50);
+    display: flex;
+    justify-content: center;
+    min-width: 320px;
+}
+
+.content {
+    margin: 2.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    max-width: 1258px;
+}
+
+.dessert-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card {
+    /* position: relative; */
+    /* max-width: 35.5rem; */
+}
+
+.card-description {
+    padding: 2.5rem 0 1.2rem;
+}
+
+h1 {
+    margin-bottom: 2.0rem;
+}
+
+.card-banner {
+    position: relative;
+}
+
+.banner {
+    border-radius: 0.8rem;
+}
+
+.product-category {
+    color: var(--Rose-400);
+    font-size: 1.5rem;
+}
+
+.product-name {
+    font-size: 1.7rem;
+    font-weight: var(--font-600);
+    color: var(--Rose-900);
+}
+
+.product-price {
+    font-size: 1.7rem;
+    font-weight: var(--font-600);
+    color: var(--Red);
+}
+
+.add-cart-btn {
+    width: 140px;
+    position: absolute;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    bottom: -12px;
+    background-color: white;
+    padding: 0.8rem 1.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 0.1rem solid var(--Rose-900);
+    border-radius: 2.5rem;
+}
+
+aside {
+    background-color: white;
+    padding: 1.8rem;
+    border-radius: 1.6rem;
+}
+
+.add-cart-btn span {
+    font-weight: var(--font-600);
+}
+
+h2 {
+    font-size: 2.8rem;
+    font-weight: var(--font-700);
+    color: var(--Red);
+    margin-bottom: 2.5rem;
+}
+
+.pick-display div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.empty-message {
+    font-weight: var(--font-700);
+    color: var(--Rose-400);
+}
+
+.add-cart-btn:hover > .card-banner {
+    border: 1px solid var(--Red);
+}
+
+.product-size-controler {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.7rem;
+}
+
+.product-size-controler:first-child {
+    align-self: self-start;
+}
+
+@media screen and (min-width: 768px)  {
+    .content {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 2.5rem;
+        align-items: start;
+    }
+
+    .dessert-list {
+        display: grid;
+        gap: 2.0rem;
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .dessert-list {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
