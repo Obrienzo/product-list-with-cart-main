@@ -1,143 +1,151 @@
 document.addEventListener('DOMContentLoaded', () => {
-    let count = 1; //  Initializing the count of products selected...
-        const selectProducts = [];
     fetch('data.json')
-     .then(response => {
+      .then(response => {
         if (!response.ok) {
-            throw new Error(`Failed to load items data: ${response.status}`);
+            throw new Error(`There seems to be a problem with loading the data: ${response.status}`);
         }
+
         return response.json();
-     })
-     .then(collections => {
-
-        // Initialize UI elements to be used...
-        const dessertCardContainer = document.querySelector('.dessert-list');
-        // console.log(collection)
+      })
+      .then(collections => {
+        // console.log(collections);
         collections.forEach((collection, index) => {
-            const card = desertCard(collection);
-            // console.log(card);
-            dessertCardContainer.appendChild(card);
+            const card = createDessertCard(collection);
+            const cardsWrapper = document.querySelector('.dessert-list');
+            cardsWrapper.appendChild(card);
         })
+      })
+      .catch(error => console.error(`Fetch problem: ${error.message}`));
 
-     })
 
-    // Create a dessert card
-    function desertCard(item) {
-        const cardContainer = document.createElement('article');
-        cardContainer.setAttribute('class', 'card');
+      // Defining all the UI elements that will displayed inside a dessert card.
+      function createDessertCard(data) {
+        const article = document.createElement('article');
+        article.setAttribute('class', 'dessert-card');
 
-        const bannerSection = document.createElement('section');
-        bannerSection.setAttribute('class', 'card-banner');
-        const image = bannerComponent(item);
-        const float = buttonComponent();
-        bannerSection.appendChild(image);
-        bannerSection.appendChild(float);
+        const firstSection = showDessertBanner(data);
+        const secondSection = showDessertDetails(data);
 
-        // Description section of the card
-        const tagContainer = document.createElement('section');
-        tagContainer.setAttribute('class', 'card-description');
-        const span = document.createElement('span');
-        span.setAttribute('class', 'product-category');
-        span.textContent = item.category;
-        const productName = document.createElement('h3');
-        productName.setAttribute('class', 'product-name');
-        productName.textContent = item.name;
-        const productPrice = document.createElement('p');
-        productPrice.setAttribute('class', 'product-price');
-        productPrice.textContent = `$${item.price.toFixed(2)}`;
-        tagContainer.appendChild(span);
-        tagContainer.appendChild(productName);
-        tagContainer.appendChild(productPrice);
+        article.appendChild(firstSection);
+        article.appendChild(secondSection);
 
-        cardContainer.appendChild(bannerSection);
-        cardContainer.appendChild(tagContainer);
+        return article;
+      }
 
-        return cardContainer;
-    }
+      // Show the dessert card first section: The dessert item Banner...
+      function showDessertBanner(data) {
+        const section = document.createElement('section');
+        section.setAttribute('class', 'card-banner');
+        const bannerImage = document.createElement('img');
+        bannerImage.setAttribute('class', 'banner');
 
-    // Banner component containing the product image...
-    function bannerComponent(data) {
-        const banner = document.createElement('img');
-        banner.setAttribute('class', 'banner');
-        banner.alt = data.category;
-       
-        function updateBanner() {
+        // Create a condition that checks the window size to display the corresponding image..
+        function checkWindowSize() {
+            // Conditionl statement..
             if (window.innerWidth <= 425) {
-                banner.src = data.image.mobile;
-                console.log('one')
+                bannerImage.src = data.image.mobile;
             } else if (window.innerWidth <= 768) {
-                banner.src = data.image.tablet;
-                console.log('two')
+                bannerImage.src = data.image.tablet;
             } else {
-                banner.src = data.image.desktop;
+                bannerImage.src = data.image.desktop;
             }
         }
 
-        updateBanner();
+        checkWindowSize();
+        window.addEventListener('resize', checkWindowSize);
+        const float = createAddCartButton();
 
-        window.addEventListener('resize', updateBanner); // Adding the resize event to make responsive images
+        section.appendChild(bannerImage);
+        section.appendChild(float);
 
-        return banner;
-    }
+        return section;
+      }
 
-    // Button component
-    function  buttonComponent() {
+
+      // Create the add Cart button 
+      function createAddCartButton() {
         const button = document.createElement('button');
         button.setAttribute('class', 'add-cart-btn');
-        const cartIcon = document.createElement('img');
-        const span = document.createElement('span');
-        span.textContent = 'Add to Cart';
-        cartIcon.src = 'assets/images/icon-add-to-cart.svg';
-        button.appendChild(cartIcon);
-        button.appendChild(span);
-
+        button.innerHTML = `
+        <img src='assets/images/icon-add-to-cart.svg' alt='Add Cart Icon' />
+        <span>Add to Cart</span>
+        `;
+        // console.log(button)
         button.onclick = () => {
+            // console.log('Add to card button clicked!');
             button.innerHTML = '';
-            button.style.backgroundColor = 'red';
-            
-            button.style.color = 'white';
-            const orderControl = orderButton();
-            button.appendChild(orderControl);
-            
+            button.style.backgroundColor = '#00aac1';
+            getDessertAmount(button);
         }
         return button;
-    }
+      }
 
-    //Order size button component for selecting the number of selected items...
-    function orderButton() {
-        const container = document.createElement('div');
-        container.setAttribute('class', 'product-size-controler');
 
-        const addButton = document.createElement('button');
-        const addIcon = document.createElement('img');
-        addIcon.src = 'assets/images/icon-increment-quantity.svg';
-        addButton.appendChild(addIcon);
-        addButton.onclick = () => {
-            count++;
-            console.log(count);
-            productCount.textContent = `${count}`;
-        };
-        const subtractButton = document.createElement('button');
-        const subtractIcon = document.createElement('img');
-        subtractIcon.src = 'assets/images/icon-decrement-quantity.svg';
-        subtractButton.appendChild(subtractIcon);
-        subtractButton.onclick = () => {
-            if (count === 0)  {
-                count;
-            } else {
+      // Create the dessert card second section with details about the product...
+      function showDessertDetails(data) {
+        const section = document.createElement('section');
+        section.setAttribute('class', 'card-description');
+
+        const dessertCategory = document.createElement('p');
+        dessertCategory.setAttribute('class', 'product-category');
+        dessertCategory.textContent = data.category;
+        // console.log(dessertCategory)
+
+        const dessertName = document.createElement('h3');
+        dessertName.setAttribute('class', 'product-name');
+        dessertName.textContent = data.name;
+
+        const dessertPrice = document.createElement('code');
+        dessertPrice.setAttribute('class', 'product-price');
+        dessertPrice.textContent = `$${data.price.toFixed(2)}`;
+
+        section.appendChild(dessertCategory);
+        section.appendChild(dessertName);
+        section.appendChild(dessertPrice);
+
+        return section;
+      }
+
+
+      //Create a widget that generate the number of dessert product selected...
+      function getDessertAmount(button) {
+        let count = 1;
+
+        const decrementBtn = document.createElement('button');
+        decrementBtn.setAttribute('class', 'operation-btn');
+        const decrementIcon = document.createElement('img');
+        decrementIcon.src = 'assets/images/icon-decrement-quantity.svg';
+        decrementBtn.appendChild(decrementIcon);
+        // console.log(decrementBtn);
+
+        const computedCount = document.createElement('span');
+        computedCount.setAttribute('class', 'product-count');
+        computedCount.textContent = count;
+
+        const incrementBtn = document.createElement('button');
+        incrementBtn.setAttribute('class', 'operation-btn')
+        const incrementIcon = document.createElement('img');
+        incrementIcon.src = 'assets/images/icon-increment-quantity.svg';
+        incrementBtn.appendChild(incrementIcon);
+        // console.log(incrementBtn);
+
+        decrementBtn.onclick = (event) => {
+            console.log('Decrement cliked btn');
+            if (count > 1) {
                 count--;
-                productCount.textContent = `${count}`;
             }
         }
 
-        const productCount = document.createElement('span');
-        productCount.textContent = `${count}`;
-        container.appendChild(subtractButton);
-        container.appendChild(productCount);
-        container.appendChild(addButton);
+        incrementBtn.onclick = (event) => {
+            // console.log('Increment cliked btn')
+            event.preventDefault();
+            count ++;
+            console.log(count);
+        }
 
-        console.log(container);
-        return container;
+        button.appendChild(decrementBtn);
+        button.appendChild(computedCount);
+        button.appendChild(incrementBtn);
+      }
 
-    }
 })
