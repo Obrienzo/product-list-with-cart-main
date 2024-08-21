@@ -140,7 +140,9 @@ document.addEventListener('DOMContentLoaded', () => {
             // console.log('Increment cliked btn')
             event.preventDefault();
             count ++;
-            console.log(count);
+            computedCount.textContent = count;
+            console.log(computedCount);
+            // console.log(count);
         }
 
         button.appendChild(decrementBtn);
