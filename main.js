@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
         button.innerHTML = createButtonChildren();
         // console.log(button)
         button.onclick = () => {
-          // console.log('Add to card button clicked!');
+          console.log('Add to card button clicked!');
           button.innerHTML = '';
           button.style.backgroundColor = '#00aac1';
           getDessertSize(button);
@@ -113,10 +113,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-      //Create head count operation uing the increment and the decrement buttons
+      //Create head count operation using the increment and the decrement buttons
       function createOperationButton(className, iconSrc, clickhandler) {
         const button = document.createElement('button');
         button.setAttribute('class', className);
+        const icon = document.createElement('img');
         icon.src = iconSrc;
         button.appendChild(icon);
         button.onclick = clickhandler;
@@ -126,23 +127,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
       //Create a widget that generate the number of dessert product selected...
       function getDessertSize(button) {
-        // let count = 1;
+        let count = 1;
 
         const computedCount = document.createElement('span');
         computedCount.setAttribute('class', 'product-count');
         computedCount.textContent = count;
 
-        const decrementBtn = createOperationButton('operation-btn', 'assets/image/icon-decrement-quantity.svg', () => {
+        const decrementBtn = createOperationButton('operation-btn', 'assets/images/icon-decrement-quantity.svg', (event) => {
+          event.stopPropagation();
           if (count > 1) {
             count--;
             computedCount.textContent = count
           } else {
             button.innerHTML = '';
+            button.style.backgroundColor = 'white';
             button.innerHTML = createButtonChildren();
           }
         });
 
-        const incrementBtn = createOperationButton('operation-btn', 'asset/images/icon-increment-quantity.svg', () => {
+        const incrementBtn = createOperationButton('operation-btn', 'assets/images/icon-increment-quantity.svg', (event) => {
+          event.stopPropagation();
           count++;
           computedCount.textContent = count;
         });
