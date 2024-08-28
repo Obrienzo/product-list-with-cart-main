@@ -77,10 +77,10 @@ document.addEventListener('DOMContentLoaded', () => {
         button.innerHTML = createButtonChildren();
         // console.log(button)
         button.onclick = () => {
-            // console.log('Add to card button clicked!');
-            button.innerHTML = '';
-            button.style.backgroundColor = '#00aac1';
-            getDessertAmount(button);
+          // console.log('Add to card button clicked!');
+          button.innerHTML = '';
+          button.style.backgroundColor = '#00aac1';
+          getDessertSize(button);
         }
         return button;
       }
@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
       //Create head count operation uing the increment and the decrement buttons
-      function createButton(className, iconSrc, clickhandler) {
+      function createOperationButton(className, iconSrc, clickhandler) {
         const button = document.createElement('button');
         button.setAttribute('class', className);
         icon.src = iconSrc;
@@ -125,21 +125,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
       //Create a widget that generate the number of dessert product selected...
-      function getDessertAmount(button) {
-        let count = 1;
+      function getDessertSize(button) {
+        // let count = 1;
 
         const computedCount = document.createElement('span');
         computedCount.setAttribute('class', 'product-count');
         computedCount.textContent = count;
 
-        const decrementBtn = createButton('operation-btn', 'assets/image/icon-decrement-quantity.svg', () => {
+        const decrementBtn = createOperationButton('operation-btn', 'assets/image/icon-decrement-quantity.svg', () => {
           if (count > 1) {
             count--;
             computedCount.textContent = count
+          } else {
+            button.innerHTML = '';
+            button.innerHTML = createButtonChildren();
           }
         });
 
-        const incrementBtn = createButton('operation-btn', 'asset/images/icon-increment-quantity.svg', () => {
+        const incrementBtn = createOperationButton('operation-btn', 'asset/images/icon-increment-quantity.svg', () => {
           count++;
           computedCount.textContent = count;
         });
