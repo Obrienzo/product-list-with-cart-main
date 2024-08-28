@@ -61,15 +61,20 @@ document.addEventListener('DOMContentLoaded', () => {
         return section;
       }
 
+      //Creating a function for the content of the addCart button
+      function createButtonChildren() {
+        return (`
+          <img src='assets/images/icon-add-to-cart.svg' alt='Add Cart Icon' />
+          <span>Add to Cart</span>
+          `)
+      }
+
 
       // Create the add Cart button 
       function createAddCartButton() {
         const button = document.createElement('button');
         button.setAttribute('class', 'add-cart-btn');
-        button.innerHTML = `
-        <img src='assets/images/icon-add-to-cart.svg' alt='Add Cart Icon' />
-        <span>Add to Cart</span>
-        `;
+        button.innerHTML = createButtonChildren();
         // console.log(button)
         button.onclick = () => {
             // console.log('Add to card button clicked!');
@@ -107,43 +112,37 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
 
+
+      //Create head count operation uing the increment and the decrement buttons
+      function createButton(className, iconSrc, clickhandler) {
+        const button = document.createElement('button');
+        button.setAttribute('class', className);
+        icon.src = iconSrc;
+        button.appendChild(icon);
+        button.onclick = clickhandler;
+        return button;
+      }
+
+
       //Create a widget that generate the number of dessert product selected...
       function getDessertAmount(button) {
         let count = 1;
-
-        const decrementBtn = document.createElement('button');
-        decrementBtn.setAttribute('class', 'operation-btn');
-        const decrementIcon = document.createElement('img');
-        decrementIcon.src = 'assets/images/icon-decrement-quantity.svg';
-        decrementBtn.appendChild(decrementIcon);
-        // console.log(decrementBtn);
 
         const computedCount = document.createElement('span');
         computedCount.setAttribute('class', 'product-count');
         computedCount.textContent = count;
 
-        const incrementBtn = document.createElement('button');
-        incrementBtn.setAttribute('class', 'operation-btn')
-        const incrementIcon = document.createElement('img');
-        incrementIcon.src = 'assets/images/icon-increment-quantity.svg';
-        incrementBtn.appendChild(incrementIcon);
-        // console.log(incrementBtn);
+        const decrementBtn = createButton('operation-btn', 'assets/image/icon-decrement-quantity.svg', () => {
+          if (count > 1) {
+            coun--;
+            computedCount.textContent = count
+          }
+        });
 
-        decrementBtn.onclick = (event) => {
-            console.log('Decrement cliked btn');
-            if (count > 1) {
-                count--;
-            }
-        }
-
-        incrementBtn.onclick = (event) => {
-            // console.log('Increment cliked btn')
-            event.preventDefault();
-            count ++;
-            computedCount.textContent = count;
-            console.log(computedCount);
-            // console.log(count);
-        }
+        const incrementBtn = createButton('operation-btn', 'asset/images/icon-increment-quantity.svg', () => {
+          count++;
+          computedCount.textContent = count;
+        });
 
         button.appendChild(decrementBtn);
         button.appendChild(computedCount);
