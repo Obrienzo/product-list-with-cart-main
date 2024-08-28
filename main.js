@@ -134,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const decrementBtn = createButton('operation-btn', 'assets/image/icon-decrement-quantity.svg', () => {
           if (count > 1) {
-            coun--;
+            count--;
             computedCount.textContent = count
           }
         });
