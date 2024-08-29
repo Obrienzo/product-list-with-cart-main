@@ -197,7 +197,7 @@ h2 {
 @media screen and (min-width: 768px)  {
     .content {
         display: grid;
-        grid-template-columns: 2fr 1fr;
+        grid-template-columns: 1.5fr 1fr;
         gap: 2.5rem;
         align-items: start;
     }
