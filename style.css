@@ -187,6 +187,11 @@ h2 {
     border: 0.1rem solid white;
     padding: 0.2rem;
     border-radius: 100%;
+    transition: transform 250ms ease-in-out;
+}
+
+.operation-btn:active {
+    transform: translateY(-0.3rem);
 }
 
 .product-count {
@@ -197,7 +202,7 @@ h2 {
 @media screen and (min-width: 768px)  {
     .content {
         display: grid;
-        grid-template-columns: 2fr 1fr;
+        grid-template-columns: 1.5fr 1fr;
         gap: 2.5rem;
         align-items: start;
     }
