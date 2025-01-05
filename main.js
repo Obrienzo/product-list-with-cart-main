@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
       function createDessertCard(data) {
         const article = document.createElement('article');
         article.setAttribute('class', 'dessert-card');
+        article.setAttribute('data-dessert-name', data.name);
 
         const firstSection = showDessertBanner(data);
         const secondSection = showDessertDetails(data);
@@ -71,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
       // Create the add Cart button 
-      function createAddCartButton() {
+      function createAddCartButton(data) {
         const button = document.createElement('button');
         button.setAttribute('class', 'add-cart-btn');
         button.innerHTML = createButtonChildren();
@@ -81,6 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
           button.innerHTML = '';
           button.style.backgroundColor = '#00aac1';
           getDessertSize(button);
+          console.log(button.parentNode);
         }
         return button;
       }
@@ -157,3 +159,45 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
 })
+
+
+function getSelectedDessert(name, count, price) {
+
+  const selectedDessert = document.createElement('div');
+  selectedDessert.setAttribute('class', 'selected-item');
+
+  const selectedDetails = document.createElement('div');
+  selectedDetails.setAttribute('class', 'selected-details');
+  const dessertName = document.createElement('h5');
+  dessertName.textContent = name;
+  dessertName.setAttribute('class', 'dessert-name');
+
+  const selectedNumbers = document.createElement('div');
+  selectedNumbers.setAttribute('class', 'selected-numbers');
+  const selectedCount = document.createElement('span');
+  selectedCount.setAttribute('class', 'selected-count');
+  selectedCount.textContent = `${count}x`;
+  const itemPrice = document.createElement('span');
+  itemPrice.setAttribute('class', 'item-price');
+  itemPrice.textContent = `@$${price}`
+  const itemTotals = document.createAttribute('code');
+  itemTotals.setAttribute('class', 'item-totals');
+  itemTotals.textContent = `$${price * count}`;
+
+  selectedNumbers.appendChild(selectedCount);
+  selectedNumbers.appendChild(itemPrice);
+  selectedNumbers.appendChild(itemTotals);
+
+  selectedDetails.appendChild(dessertName);
+  selectedDetails.appendChild(selectedNumbers);
+
+  const deleteIcon = document.createElement('img');
+  deleteIcon.src = 'assets/images/icon-remove-item.svg';
+  deleteIcon.alt = 'remove dessert item';
+
+  selectedDessert.appendChild(selectedDetails);
+  selectedDessert.appendChild(deleteIcon);
+
+  return selectedDessert;
+
+}
