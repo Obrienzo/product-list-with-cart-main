@@ -68,11 +68,6 @@ body {
     justify-content: center;
 }
 
-.card {
-    /* position: relative; */
-    /* max-width: 35.5rem; */
-}
-
 .card-description {
     padding: 2.5rem 0 1.2rem;
 }
