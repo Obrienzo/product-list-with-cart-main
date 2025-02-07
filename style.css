@@ -59,7 +59,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 3.0rem;
-    max-width: 1028px;
+    max-width: 1228px;
 }
 
 .dessert-list {
@@ -109,7 +109,7 @@ h1 {
 }
 
 .add-cart-btn:active + .banner {
-    border: 0.2rem solid var(--Red);
+    border: 0.2rem solid var(--price-color);
 }
 
 .add-cart-btn {
@@ -158,7 +158,7 @@ h2 {
 }
 
 .add-cart-btn:hover > .card-banner {
-    border: 1px solid var(--Red);
+    border: 1px solid var(--moca-dandelion);
 }
 
 .product-size-controler {
