@@ -26,18 +26,24 @@ export class DessertCard {
         return detailsSection;
     }
 
+    // Function for creating initial card button state component...
+    createButtonInitialState() {
+        return (`
+            <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" fill="none" viewBox="0 0 21 20"><g fill="#C73B0F" clip-path="url(#a)"><path d="M6.583 18.75a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5ZM15.334 18.75a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5ZM3.446 1.752a.625.625 0 0 0-.613-.502h-2.5V2.5h1.988l2.4 11.998a.625.625 0 0 0 .612.502h11.25v-1.25H5.847l-.5-2.5h11.238a.625.625 0 0 0 .61-.49l1.417-6.385h-1.28L16.083 10H5.096l-1.65-8.248Z"/><path d="M11.584 3.75v-2.5h-1.25v2.5h-2.5V5h2.5v2.5h1.25V5h2.5V3.75h-2.5Z"/></g><defs><clipPath id="a"><path fill="#fff" d="M.333 0h20v20h-20z"/></clipPath></defs></svg>
+           <span>Add to Cart</span>
+           `);
+    }
+
     createFloat() {
         const addCartButton = document.createElement('button');
         addCartButton.className = 'add-cart-btn';
 
-        addCartButton.innerHTML = `
-           <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" fill="none" viewBox="0 0 21 20"><g fill="#C73B0F" clip-path="url(#a)"><path d="M6.583 18.75a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5ZM15.334 18.75a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5ZM3.446 1.752a.625.625 0 0 0-.613-.502h-2.5V2.5h1.988l2.4 11.998a.625.625 0 0 0 .612.502h11.25v-1.25H5.847l-.5-2.5h11.238a.625.625 0 0 0 .61-.49l1.417-6.385h-1.28L16.083 10H5.096l-1.65-8.248Z"/><path d="M11.584 3.75v-2.5h-1.25v2.5h-2.5V5h2.5v2.5h1.25V5h2.5V3.75h-2.5Z"/></g><defs><clipPath id="a"><path fill="#fff" d="M.333 0h20v20h-20z"/></clipPath></defs></svg>
-           <span>Add to Cart</span>
-        `;
+        addCartButton.innerHTML = this.createButtonInitialState();
 
         addCartButton.addEventListener('click', (event) => {
             event.stopPropagation();
-            event.preventDefault();
+
+            this.value = 1
 
             addCartButton.style.backgroundColor = 'red';
             addCartButton.innerHTML = '';
@@ -60,14 +66,24 @@ export class DessertCard {
             `;
 
             this.decButton.addEventListener('click', (event) => {
+                event.stopPropagation();
                 this.value--;
-                this.displayValue = this.value;
+
+                if (this.value < 1) {
+                    addCartButton.style.backgroundColor = 'white';
+                    addCartButton.innerHTML = this.createButtonInitialState();
+                    this.value = 0;
+                } else {
+                    this.displayValue.textContent = this.value;
+                }
             });
 
         
             this.incButton.addEventListener('click', (event) => {
+                event.stopPropagation();
                 this.value++;
-                this.displayValue = this.value;
+                console.log(this.value)
+                this.displayValue.textContent = this.value;
             })
 
             addCartButton.append(this.decButton, this.displayValue, this.incButton);
@@ -76,22 +92,26 @@ export class DessertCard {
         return addCartButton;
     }
 
+    setImageSource(imageBanner) {
+        if (window.innerWidth < 425) {
+            imageBanner.src = this.coverMobile;
+            console.log('small screen size')
+        } else if (window.innerWidth < 768) {
+            imageBanner.src = this.coverTablet;
+        } else {
+            imageBanner.src = this.coverDesktop;
+        }
+    }
+
     createImageBanner() {
         // Create responsive image as the user changes screen size...
         const imageBanner = document.createElement('img');
         imageBanner.className = 'banner';
+        this.setImageSource(imageBanner);
         
         // Listening for the resize event on the window to change the banner image accordingly...
         window.addEventListener('resize', (event) =>  {
-            
-            if (window.innerWidth < 425) {
-                imageBanner.src = this.coverMobile;
-                console.log('small screen size')
-            } else if (window.innerWidth < 768) {
-                imageBanner.src = this.coverTablet;
-            } else {
-                imageBanner.src = this.coverDesktop;
-            }
+            this.setImageSource(imageBanner);
         });
 
         return imageBanner;

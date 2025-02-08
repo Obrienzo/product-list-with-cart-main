@@ -79,7 +79,6 @@ h1 {
 
 .card-banner {
     position: relative;
-    /* border: 1px solid black; */
     display: flex;
     align-items: stretch;
 }
@@ -87,8 +86,10 @@ h1 {
 .banner {
     border-radius: 0.8rem;
     height: 100%;
-    /* filter: sepia(0.3); */
-    /* border: 0.35rem solid var(--moca-dandelion); */
+}
+
+.selected {
+    border: 0.1rem solid var(--moca-dandelion);
 }
 
 .product-category {
@@ -110,6 +111,8 @@ h1 {
 
 .add-cart-btn:active + .banner {
     border: 0.2rem solid var(--price-color);
+    filter: sepia(0.3);
+    border: 0.35rem solid var(--moca-dandelion);
 }
 
 .add-cart-btn {
@@ -157,10 +160,6 @@ h2 {
     color: var(--product-category-text-color);
 }
 
-.add-cart-btn:hover > .card-banner {
-    border: 1px solid var(--moca-dandelion);
-}
-
 .product-size-controler {
     flex: 1;
     display: flex;
@@ -192,6 +191,17 @@ h2 {
 .product-count {
     font-size: 1.7rem;
     color: var(--moca-dandelion);
+}
+
+.dec-btn,
+.inc-btn {
+    border: 0.05rem solid white;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    align-self: stretch;
 }
 
 @media screen and (min-width: 768px)  {
