@@ -7,7 +7,7 @@ export class DessertCard {
         this.coverDesktop = data.image.desktop;
         this.name = data.name;
         this.category = data.category;
-        this.price = data.price.toFixed(2);
+        this.price = parseFloat(data.price);
         this.value = 0;
 
         // Create DOM element immediately..
@@ -34,16 +34,11 @@ export class DessertCard {
            `);
     }
 
-    createFloat() {
-        const addCartButton = document.createElement('button');
-        addCartButton.className = 'add-cart-btn';
-
-        addCartButton.innerHTML = this.createButtonInitialState();
-
+    addCartEvent(addCartButton) {
         addCartButton.addEventListener('click', (event) => {
             event.stopPropagation();
 
-            this.value = 1
+            this.value = 1;
 
             addCartButton.style.backgroundColor = 'red';
             addCartButton.innerHTML = '';
@@ -78,16 +73,25 @@ export class DessertCard {
                 }
             });
 
+            console.log(`I have picked ${this.value} ${this.name}'s`);
         
             this.incButton.addEventListener('click', (event) => {
                 event.stopPropagation();
                 this.value++;
-                console.log(this.value)
                 this.displayValue.textContent = this.value;
-            })
+            });
 
             addCartButton.append(this.decButton, this.displayValue, this.incButton);
         })
+    }
+
+    createFloat() {
+        const addCartButton = document.createElement('button');
+        addCartButton.className = 'add-cart-btn';
+
+        addCartButton.innerHTML = this.createButtonInitialState();
+
+       this.addCartEvent(addCartButton);
 
         return addCartButton;
     }
