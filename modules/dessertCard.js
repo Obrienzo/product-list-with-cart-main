@@ -37,6 +37,8 @@ export class DessertCard {
     addCartEvent(addCartButton) {
         addCartButton.addEventListener('click', (event) => {
             event.stopPropagation();
+            const image = this.createImageBanner();
+            image.style.border = '1px solid red';
 
             this.value = 1;
 
@@ -82,7 +84,7 @@ export class DessertCard {
             });
 
             addCartButton.append(this.decButton, this.displayValue, this.incButton);
-        })
+        });
     }
 
     createFloat() {
