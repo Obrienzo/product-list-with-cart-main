@@ -1,84 +1,42 @@
-import { buttonInitialState } from "./updateButton.js";
+import bannerCoverChange from "./coverChange.js";
 
-export function banner(image, count) {
-    const bannerSection = document.createElement('section');
-    bannerSection.classList.add('card-banner');
+import addDessert from "./addCart.js";
 
-    const imageBanner = document.createElement('img');
-    imageBanner.classList.add('banner');
-    setImageSource(imageBanner, image);
-    
+const dessertBannerWrapper = (cover, count) => {
 
-    window.addEventListener('resize', (ev) => {
-        setImageSource(imageBanner, image);
-    });
+    let count = 0;
+
+    const bannerContainer = document.createElement('div');
+    bannerContainer.classList.add('banner-container');
+
+    const cardCover = document.createElement('img');
+    cardCover.classList.add('card-cover');
+
+    window.addEventListener('resize', () => {
+        bannerCoverChange(cardCover, cover);
+    }); // Event listening the window width size change...
 
     const addCartButton = document.createElement('button');
-    addCartButton.classList.add('add-cart-btn');
-    addCartButton.innerHTML = buttonInitialState();
+    addCartButton.classList.add('add-cartBtn');
 
-    addCartButton.addEventListener('click', (event) => {
-        event.stopPropagation();
-        count = 1;
+    const cartIcon = document.createElement('img');
+    cartIcon.classList.add('cart-icon');
+    cartIcon.src = '/assets/images/icon-add-to-cart.svg';
 
-        addCartButton.style.backgroundColor = 'red';
-        addCartButton.innerHTML = '';
+    const buttonSpan = document.createElement('span');
+    buttonSpan.textContent = 'Add to Cart';
 
-        const decButton = document.createElement('button');
-        decButton.classList.add('dec-btn');
-        decButton.innerHTML = `
-        <img src="assets/images/icon-decrement-quantity.svg" alt="increment button">
-        `;
+    addCartButton.append(cartIcon, buttonSpan);
 
-        const displayValue = document.createElement('span');
-        displayValue.classList.add = 'selected-amount';
-        displayValue.textContent = count;
-
-        const incButton = document.createElement('button');
-        incButton.classList.add('inc-btn');
-        incButton.innerHTML = `
-        <img src="assets/images/icon-increment-quantity.svg" alt="increment button">
-        `;
-
-        decButton.addEventListener('click', (ev) => {
-            ev.stopPropagation();
-            count--;
-            displayValue.textContent = count;
-
-            if (count < 1) {
-                addCartButton.style.backgroundColor = 'white';
-                addCartButton.innerHTML = buttonInitialState();
-                count = 0;
-            }
-        });
-
-        incButton.addEventListener('click', (ev) => {
-            ev.stopPropagation();
-            count++;
-            displayValue.textContent = count;
-        });
-
-        addCartButton.append(decButton, displayValue, incButton);
-    });
-
-
-    bannerSection.append(imageBanner, addCartButton);
-
-    return bannerSection;
-
-
-}
-
-
-
-
-
-function setImageSource(imageBanner, image) { // Function for setting responsive images for the adequate medium...
-    if (window.innerWidth < 425) {
-        imageBanner.src = image.mobile;
-    } else if (window.innerWidth < 768) {
-        imageBanner.src = image.tablet;
-    } else {
-        imageBanner.src = image.desktop;
+    addCartButton.onclick = () => {
+        addCartButton.style.display = 'none';
+        bannerContainer.appendChild(addDessert(count));
     }
+
+    bannerContainer.append(cardCover, addCartButton);
+
+    return bannerContainer;
+
 }
+
+export default dessertBannerWrapper;
