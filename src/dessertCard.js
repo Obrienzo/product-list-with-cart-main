@@ -5,6 +5,11 @@ const dessertCard = (object) => {
 
     const cardWrapper = document.createElement('div');
     cardWrapper.classList.add('dessert-card');
+
+    const cardData = {
+        dessertName: object.name,
+        dessertPrice: object.price
+    }
     
     const banner = dessertBannerWrapper(object.image);
     const details = detailsData(object.name, object.category, object.price);

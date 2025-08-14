@@ -1,10 +1,7 @@
-
-const addDessert = (addCartButton, count) => {
+const addDessert = (addCartButton, count, setBorder) => {
 
     const controlsWrapper = document.createElement('div');
-    controlsWrapper.classList.add('controls-wrapper', 'inactive');
-
-    addCartButton.classList.contains('inactive') ? console.log('hello') : '';
+    controlsWrapper.classList.add('inactive', 'controls-wrapper');
 
     const decrementBtn = document.createElement('button');
     decrementBtn.classList.add('decr-btn');
@@ -15,7 +12,7 @@ const addDessert = (addCartButton, count) => {
 
     const countDisplay = document.createElement('p');
     countDisplay.classList.add('count-display');
-    countDisplay.textContent = count;
+    countDisplay.textContent = count.value;
 
     const incrementBtn = document.createElement('button');
     incrementBtn.classList.add('incr-btn');
@@ -25,24 +22,24 @@ const addDessert = (addCartButton, count) => {
     incrementBtn.appendChild(incrementLogo);
 
     decrementBtn.onclick = () => {
-        count--;
-        if (count < 1) {
-            count = 0;
+        count.value--;
+        if (count.value < 1) {
+            count.value = 0;
             controlsWrapper.classList.toggle('inactive');
             addCartButton.classList.toggle('inactive');
+            setBorder(false);
         }
-        countDisplay.textContent = count;
+        countDisplay.textContent = count.value;
     }
 
     incrementBtn.onclick = () => {
-        count++;
-        countDisplay.textContent = count;
+        count.value++;
+        countDisplay.textContent = count.value;
     }
 
     controlsWrapper.append(decrementBtn, countDisplay, incrementBtn);
 
     return  controlsWrapper;
 }
-
 
 export default addDessert;

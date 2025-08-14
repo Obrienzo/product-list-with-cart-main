@@ -1,3 +1,7 @@
+html {
+  font-size: 62.5%;
+}
+
 ::before,
 ::after,
 * {
@@ -10,19 +14,27 @@
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  color: #242424;
+  background-color: rgba(255, 255, 255, 0.87);
 }
 
+img {
+  max-width: 100%;
+  object-fit: cover;
+}
+
+button {
+  font-family: inherit;
+  font-size: inherit;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
 
 body {
+  font-size: 1.6rem;
   display: flex;
   place-items: center;
   min-width: 320px;
@@ -36,7 +48,85 @@ body {
   text-align: center;
 }
 
-.inactive {
+.dessert-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.9rem;
+}
+
+.banner-container {
+  position: relative;
+}
+
+.card-cover {
+  border-radius: 0.8rem;
+}
+
+.add-cartBtn {
+  position: absolute;
+  bottom: -1.8rem;
+  left: 0;
+  right: 0;
+  width: fit-content;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 1.0rem 2.0rem;
+  border-radius: 2.5rem;
+  background-color: #242424;
+}
+
+.controls-wrapper {
+  position: absolute;
+  bottom: -1.8rem;
+  left: 0;
+  right: 0;
+  width: fit-content;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 4.0rem;
+  padding: 1.0rem ;
+  border-radius: 2.5rem;
+  background-color: #242424;
+  color: aliceblue;
+}
+
+.controls-wrapper button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0.05rem solid aliceblue;
+  border-radius: 50%;
+  padding: 0.5rem;
+  aspect-ratio: 1 / 1;
+}
+
+.banner-container .inactive {
   display: none;
+}
+
+.banner-container .border {
+  border: 0.28rem solid red;
+}
+
+.details-wrapper {
+  align-self: flex-start;
+  text-align: start;
+}
+
+.dessert-category {
+  font-size: 1.7rem;
+}
+
+.dessert-name{
+  font-size: 2.0rem;
+  font-weight: 600;
+}
+
+.dessert-price {
+  font-size: 1.7rem;
+  font-weight: 500;
 }
 

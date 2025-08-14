@@ -3,7 +3,7 @@ import addDessert from "./addCart";
 
 const dessertBannerWrapper = (image) => {
 
-    let count = 0;
+    let count = { value: 0 }; // Use an object!
 
     const bannerContainer = document.createElement('div');
     bannerContainer.classList.add('banner-container');
@@ -13,9 +13,8 @@ const dessertBannerWrapper = (image) => {
     bannerCoverChange(cardCover, image);
 
     window.addEventListener('resize', () => {
-        console.log(window.innerWidth);
         bannerCoverChange(cardCover, image);
-    }); // Event listening the window size change...
+    });
 
     const addCartButton = document.createElement('button');
     addCartButton.classList.add('add-cartBtn');
@@ -30,12 +29,20 @@ const dessertBannerWrapper = (image) => {
 
     addCartButton.append(cartIcon, buttonSpan);
 
-    const addDessertContorls = addDessert(addCartButton, count);
+    const addDessertContorls = addDessert(addCartButton, count, setBorder);
 
     addCartButton.onclick = () => {
-        count++;
+        count.value++; // Use .value
         addCartButton.classList.toggle('inactive');
         addDessertContorls.classList.toggle('inactive');
+        // Update the count display to show 1
+        const countDisplay = addDessertContorls.querySelector('.count-display');
+        if (countDisplay) countDisplay.textContent = count.value;
+        setBorder(true);
+    }
+
+    function setBorder(isOn) {
+        isOn ? cardCover.classList.add('border') : cardCover.classList.remove('border')
     }
 
     bannerContainer.append(cardCover, addCartButton, addDessertContorls);
