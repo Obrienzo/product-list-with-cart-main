@@ -1,4 +1,4 @@
-const addDessert = (addCartButton, count, setBorder) => {
+const addDessert = (addCartButton, count, setBorder, object, createObject) => {
 
     const controlsWrapper = document.createElement('div');
     controlsWrapper.classList.add('inactive', 'controls-wrapper');
@@ -30,12 +30,16 @@ const addDessert = (addCartButton, count, setBorder) => {
             setBorder(false);
         }
         countDisplay.textContent = count.value;
+        console.log(createObject(object, count.value));
     }
 
     incrementBtn.onclick = () => {
         count.value++;
         countDisplay.textContent = count.value;
+        console.log(createObject(object, count.value));
     }
+
+    
 
     controlsWrapper.append(decrementBtn, countDisplay, incrementBtn);
 

@@ -11,8 +11,8 @@ const dessertCard = (object) => {
         dessertPrice: object.price
     }
     
-    const banner = dessertBannerWrapper(object.image);
-    const details = detailsData(object.name, object.category, object.price);
+    const banner = dessertBannerWrapper(object);
+    const details = detailsData(object);
 
     cardWrapper.append(banner, details);
 
