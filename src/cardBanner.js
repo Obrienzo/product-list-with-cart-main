@@ -1,9 +1,12 @@
 import bannerCoverChange from "./coverChange";
-import addDessert from "./addCart";
+import addCartInit from "./addCartInit";
+import cardControls from "./cardControls";
 
 const dessertBannerWrapper = (object) => {
 
-    let count = { value: 0 }; // Use an object!
+    let count = {value: 0};
+    let addCartActive = true;
+    let controls = false;
 
     const bannerContainer = document.createElement('div');
     bannerContainer.classList.add('banner-container');
@@ -16,46 +19,22 @@ const dessertBannerWrapper = (object) => {
         bannerCoverChange(cardCover, object.image);
     });
 
-    const addCartButton = document.createElement('button');
-    addCartButton.classList.add('add-cartBtn');
+    const buttonsWrapper = document.createElement('div');
+    buttonsWrapper.classList.add('btn-wrapper');
 
-    const cartIcon = document.createElement('img');
-    cartIcon.classList.add('cart-icon');
-    cartIcon.src = '/src/assets/images/icon-add-to-cart.svg';
-    cartIcon.alt = 'Add to cart icon';
+    const addCartButton = addCartInit(count.value, addCartActive);
 
-    const buttonSpan = document.createElement('span');
-    buttonSpan.textContent = 'Add to Cart';
-
-    addCartButton.append(cartIcon, buttonSpan);
-
-    const addDessertContorls = addDessert(addCartButton, count, setBorder, object, createDessertObject);
-
-    addCartButton.onclick = () => {
-        count.value++;
-        addCartButton.classList.toggle('inactive');
-        addDessertContorls.classList.toggle('inactive');
-        // Update the count display to show 1
-        const countDisplay = addDessertContorls.querySelector('.count-display');
-        if (countDisplay) countDisplay.textContent = count.value;
+    bannerContainer.addEventListener('add-cart', (ev) => {
+        // addCartButton.classList.add('inactive');
+        // To get back for the above commented code..
         setBorder(true);
-        console.log(`${object.name}, are ${count.value}`);
-    }
+    });
 
     function setBorder(isOn) {
         isOn ? cardCover.classList.add('border') : cardCover.classList.remove('border')
     }
 
-    function createDessertObject(object, count) {
-        return {
-            name: object.name,
-            price: object.price,
-            count: count,
-            thumbnail: object.image.thumbnail
-        }
-    }
-
-    bannerContainer.append(cardCover, addCartButton, addDessertContorls);
+    bannerContainer.append(cardCover, addCartButton);
 
     return bannerContainer;
 

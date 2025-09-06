@@ -1,13 +1,16 @@
-const addDessert = (addCartButton, count, setBorder) => {
+import plusSign from './assets/images/icon-increment-quantity.svg'
+import minusSign from './assets/images/icon-decrement-quantity.svg'
+
+const cardControls = (count, setBorder) => {
 
     const controlsWrapper = document.createElement('div');
-    controlsWrapper.classList.add('inactive', 'controls-wrapper');
+    controlsWrapper.classList.add('controls-wrapper');
 
     const decrementBtn = document.createElement('button');
     decrementBtn.classList.add('decr-btn');
     const decrementLogo = document.createElement('img');
-    decrementLogo.src = '/src/assets/images/icon-decrement-quantity.svg';
-    decrementLogo.alt = 'Decrement sign';
+    decrementLogo.src = minusSign;
+    decrementLogo.alt = 'Decrement Sign';
     decrementBtn.appendChild(decrementLogo);
 
     const countDisplay = document.createElement('p');
@@ -17,31 +20,30 @@ const addDessert = (addCartButton, count, setBorder) => {
     const incrementBtn = document.createElement('button');
     incrementBtn.classList.add('incr-btn');
     const incrementLogo = document.createElement('img');
-    incrementLogo.src = '/src/assets/images/icon-increment-quantity.svg';
-    incrementLogo.alt = 'Increment sign';
+    incrementLogo.src = plusSign;
+    incrementLogo.alt = 'Increment Sign';
     incrementBtn.appendChild(incrementLogo);
 
-    decrementBtn.onclick = () => {
+    decrementBtn.addEventListener('click', () => {
         count.value--;
+        
         if (count.value < 1) {
             count.value = 0;
-            controlsWrapper.classList.toggle('inactive');
-            addCartButton.classList.toggle('inactive');
             setBorder(false);
         }
         countDisplay.textContent = count.value;
-    }
+    })
 
-    incrementBtn.onclick = () => {
+    incrementBtn.addEventListener('click', () => {
         count.value++;
         countDisplay.textContent = count.value;
-    }
+    })
 
-    
 
     controlsWrapper.append(decrementBtn, countDisplay, incrementBtn);
 
-    return  controlsWrapper;
+    return controlsWrapper;
+
 }
 
-export default addDessert;
+export default cardControls;

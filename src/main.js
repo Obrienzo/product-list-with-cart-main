@@ -34,3 +34,5 @@ dessertData.forEach(dessert => {
 app.append(dessertListWrapper, cartWrapper)
 
 
+// App Library of functions that we will be using...
+
