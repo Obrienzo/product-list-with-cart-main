@@ -16,7 +16,7 @@ const addCartInit = (count, addCartActive) => {
     cartButton.addEventListener('click', () => {
         cartButton.dispatchEvent(new CustomEvent("add-cart", {
             detail: {
-                value: ++count,
+                value: ++count.value,
                 addCartActive: false,
             },
             bubbles: true

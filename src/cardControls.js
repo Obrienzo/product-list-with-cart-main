@@ -1,10 +1,10 @@
 import plusSign from './assets/images/icon-increment-quantity.svg'
 import minusSign from './assets/images/icon-decrement-quantity.svg'
 
-const cardControls = (count, setBorder) => {
+const cardControls = (count, controls) => {
 
     const controlsWrapper = document.createElement('div');
-    controlsWrapper.classList.add('controls-wrapper');
+    controlsWrapper.classList.add('controls-wrapper', 'inactive');
 
     const decrementBtn = document.createElement('button');
     decrementBtn.classList.add('decr-btn');
@@ -24,25 +24,35 @@ const cardControls = (count, setBorder) => {
     incrementLogo.alt = 'Increment Sign';
     incrementBtn.appendChild(incrementLogo);
 
-    decrementBtn.addEventListener('click', () => {
+    decrementBtn.addEventListener('click', () => { 
         count.value--;
-        
-        if (count.value < 1) {
-            count.value = 0;
-            setBorder(false);
-        }
         countDisplay.textContent = count.value;
+        decrementBtn.dispatchEvent(new CustomEvent('reduce-count', {
+            detail: { value: count.value },
+            bubbles: true,
+        }));
+
+        if (count.value <= 0) {
+                decrementBtn.dispatchEvent(new CustomEvent('initialize-card', {
+                    detail: { value: 0, controls: true},
+                    bubbles: true,
+                }));
+        }
     })
 
     incrementBtn.addEventListener('click', () => {
         count.value++;
         countDisplay.textContent = count.value;
+        incrementBtn.dispatchEvent(new CustomEvent('increase-count', {
+            detail: { value: count.value },
+            bubbles: true,
+        }));
     })
 
 
     controlsWrapper.append(decrementBtn, countDisplay, incrementBtn);
 
-    return controlsWrapper;
+    return { controlsWrapper, countDisplay };
 
 }
 

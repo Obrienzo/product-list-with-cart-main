@@ -62,13 +62,17 @@ body {
   border-radius: 0.8rem;
 }
 
-.add-cartBtn {
+.btns-wrapper {
   position: absolute;
-  bottom: -1.8rem;
+  bottom: -1.9rem;
   left: 0;
   right: 0;
   width: fit-content;
   margin: 0 auto;
+}
+
+.add-cartBtn {
+  width: 15.5rem;
   display: flex;
   align-items: center;
   gap: 1.2rem;
@@ -78,13 +82,9 @@ body {
 }
 
 .controls-wrapper {
-  position: absolute;
-  bottom: -1.8rem;
-  left: 0;
-  right: 0;
-  width: fit-content;
-  margin: 0 auto;
+  width: 15.5rem;
   display: flex;
+  justify-content: center;
   align-items: center;
   gap: 4.0rem;
   padding: 1.0rem ;
@@ -101,6 +101,10 @@ body {
   border-radius: 50%;
   padding: 0.5rem;
   aspect-ratio: 1 / 1;
+}
+
+.count-display {
+  color: aliceblue;
 }
 
 .inactive {

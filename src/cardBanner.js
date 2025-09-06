@@ -20,21 +20,49 @@ const dessertBannerWrapper = (object) => {
     });
 
     const buttonsWrapper = document.createElement('div');
-    buttonsWrapper.classList.add('btn-wrapper');
+    buttonsWrapper.classList.add('btns-wrapper');
 
-    const addCartButton = addCartInit(count.value, addCartActive);
+    const addCartButton = addCartInit(count, addCartActive);
+    const { controlsWrapper: itemControls, countDisplay} = cardControls(count, controls); // implementing destructuring to expose the value of the count display element to the parent wrapper...
+
+    buttonsWrapper.append(addCartButton,itemControls);
+
+    // List of CustomEvents listeners...
 
     bannerContainer.addEventListener('add-cart', (ev) => {
-        // addCartButton.classList.add('inactive');
-        // To get back for the above commented code..
+        addCartButton.classList.add('inactive');
+        itemControls.classList.remove('inactive');
         setBorder(true);
+        countDisplay.textContent = ev.detail.value;
     });
+
+    bannerContainer.addEventListener('reduce-count', (ev) => {
+        updateCount(ev.detail.value);
+    });
+
+    bannerContainer.addEventListener('increase-count', (ev) => {
+        updateCount(ev.detail.value);
+    });
+
+    bannerContainer.addEventListener('initialize-card', (ev) => {
+        console.log('initialize again the card');
+        updateCount(ev.detail.value);
+        count.value = 0;
+        addCartButton.classList.remove('inactive');
+        itemControls.classList.add('inactive');
+        setBorder(false);
+        console.log(count)
+    })
 
     function setBorder(isOn) {
         isOn ? cardCover.classList.add('border') : cardCover.classList.remove('border')
     }
 
-    bannerContainer.append(cardCover, addCartButton);
+    function updateCount(value) {
+        countDisplay.textContent = value;
+    }
+
+    bannerContainer.append(cardCover, buttonsWrapper);
 
     return bannerContainer;
 
