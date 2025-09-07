@@ -1,8 +1,8 @@
 import bannerCoverChange from "./coverChange";
-import addCartInit from "./addCartInit";
-import cardControls from "./cardControls";
+import createCartButton from "./addCartInit";
+import createControls from "./cardControls";
 
-const dessertBannerWrapper = (object) => {
+const createBannerWrapper = (object) => {
 
     // Dessert card initial states...
     let count = {value: 0};
@@ -24,8 +24,8 @@ const dessertBannerWrapper = (object) => {
     const buttonsWrapper = document.createElement('div');
     buttonsWrapper.classList.add('btns-wrapper');
 
-    const addCartButton = addCartInit(count, addCartActive, object.name);
-    const { controlsWrapper: itemControls, countDisplay} = cardControls(count, controls, object.name); // implementing destructuring to expose the value of the count display element to the parent wrapper...
+    const addCartButton = createCartButton(count, addCartActive, object.name);
+    const { controlsWrapper: itemControls, countDisplay} = createControls(count, controls, object.name); // implementing destructuring to expose the value of the count display element to the parent wrapper...
 
     buttonsWrapper.append(addCartButton,itemControls);
 
@@ -64,6 +64,7 @@ const dessertBannerWrapper = (object) => {
 
     // Function to update the count.value displayed inside the countDisplay element...
     function updateCount(value) {
+        count.value = value;
         countDisplay.textContent = value;
     }
 
@@ -73,4 +74,4 @@ const dessertBannerWrapper = (object) => {
 
 }
 
-export default dessertBannerWrapper;
+export default createBannerWrapper;

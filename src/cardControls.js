@@ -1,7 +1,7 @@
 import plusSign from './assets/images/icon-increment-quantity.svg'
 import minusSign from './assets/images/icon-decrement-quantity.svg'
 
-const cardControls = (count, controls, name) => {
+const createControls = (count, controls) => {
 
     const controlsWrapper = document.createElement('div');
     controlsWrapper.classList.add('controls-wrapper', 'inactive');
@@ -34,13 +34,13 @@ const cardControls = (count, controls, name) => {
         count.value--;
         countDisplay.textContent = count.value;
         decrementBtn.dispatchEvent(new CustomEvent('reduce-count', {
-            detail: { value: count.value, id: name },
+            detail: { value: count.value },
             bubbles: true,
         }));
 
-        if (count.value <= 0) {
+        if (count.value === 0) {
                 decrementBtn.dispatchEvent(new CustomEvent('initialize-card', {
-                    detail: { value: 0, controls: true, id: name},
+                    detail: { value: 0, controls: true },
                     bubbles: true,
                 }));
         }
@@ -50,7 +50,7 @@ const cardControls = (count, controls, name) => {
         count.value++;
         countDisplay.textContent = count.value;
         incrementBtn.dispatchEvent(new CustomEvent('increase-count', {
-            detail: { value: count.value, id: name },
+            detail: { value: count.value },
             bubbles: true,
         }));
     })
@@ -63,4 +63,4 @@ const cardControls = (count, controls, name) => {
 
 }
 
-export default cardControls;
+export default createControls;

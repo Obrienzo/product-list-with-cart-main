@@ -1,13 +1,13 @@
-import dessertBannerWrapper from "./cardBanner";
-import detailsData from "./cardDetails";
+import createBannerWrapper from "./cardBanner";
+import createDetails from "./cardDetails";
 
 const dessertCard = (object) => {
 
     const cardWrapper = document.createElement('div');
     cardWrapper.classList.add('dessert-card');
     
-    const banner = dessertBannerWrapper(object);
-    const details = detailsData(object);
+    const banner = createBannerWrapper(object);
+    const details = createDetails(object);
 
     cardWrapper.append(banner, details);
 

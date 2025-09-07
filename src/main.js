@@ -33,17 +33,6 @@ dessertData.forEach(dessert => {
 
 app.append(dessertListWrapper, cartWrapper)
 
-app.addEventListener('add-cart', (ev) => {
-  console.log(ev.detail.value, ev.detail.id);
-})
-
-app.addEventListener('increase-count', (ev) => {
-  console.log(ev.detail.value, ev.detail.id);
-})
-
-app.addEventListener('reduce-count', (ev) => {
-  console.log(ev.detail.value, ev.detail.id);
-})
 
 
 
