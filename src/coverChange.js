@@ -1,7 +1,7 @@
 
 const bannerCoverChange = (wrapper, image) => {
 
-    // Handling the responsive image change when the width windows dimensions change...
+    // Functionality to display the right image following the dimensions of the window...
     if (window.innerWidth < 768) {
         wrapper.src = image.mobile;
     } else if (window.innerWidth < 1024) {

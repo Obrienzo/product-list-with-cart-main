@@ -1,6 +1,6 @@
 import cartIcon from './assets/images/icon-add-to-cart.svg';
 
-const addCartInit = (count, addCartActive) => {
+const addCartInit = (count, addCartActive, name) => {
 
     const cartButton = document.createElement('button');
     cartButton.classList.add('add-cartBtn');
@@ -13,10 +13,17 @@ const addCartInit = (count, addCartActive) => {
     const buttonSpan = document.createElement('span');
     buttonSpan.textContent = 'Add to Cart';
 
+    /*
+        Creating a Custom Event to be able to 
+        make an announcement to the DOM of the change in the state
+        of the add button element...
+    */
     cartButton.addEventListener('click', () => {
+        count.value++
         cartButton.dispatchEvent(new CustomEvent("add-cart", {
             detail: {
-                value: ++count.value,
+                value: count.value,
+                id: name,
                 addCartActive: false,
             },
             bubbles: true

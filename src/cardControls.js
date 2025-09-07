@@ -1,7 +1,7 @@
 import plusSign from './assets/images/icon-increment-quantity.svg'
 import minusSign from './assets/images/icon-decrement-quantity.svg'
 
-const cardControls = (count, controls) => {
+const cardControls = (count, controls, name) => {
 
     const controlsWrapper = document.createElement('div');
     controlsWrapper.classList.add('controls-wrapper', 'inactive');
@@ -24,17 +24,23 @@ const cardControls = (count, controls) => {
     incrementLogo.alt = 'Increment Sign';
     incrementBtn.appendChild(incrementLogo);
 
+    /*
+        After clicking the below element the user is
+        generating Custom Events so that the change that
+        the below elements produce can be heard throughout 
+        the DOM and be used in our cart component...
+    */
     decrementBtn.addEventListener('click', () => { 
         count.value--;
         countDisplay.textContent = count.value;
         decrementBtn.dispatchEvent(new CustomEvent('reduce-count', {
-            detail: { value: count.value },
+            detail: { value: count.value, id: name },
             bubbles: true,
         }));
 
         if (count.value <= 0) {
                 decrementBtn.dispatchEvent(new CustomEvent('initialize-card', {
-                    detail: { value: 0, controls: true},
+                    detail: { value: 0, controls: true, id: name},
                     bubbles: true,
                 }));
         }
@@ -44,7 +50,7 @@ const cardControls = (count, controls) => {
         count.value++;
         countDisplay.textContent = count.value;
         incrementBtn.dispatchEvent(new CustomEvent('increase-count', {
-            detail: { value: count.value },
+            detail: { value: count.value, id: name },
             bubbles: true,
         }));
     })
@@ -52,6 +58,7 @@ const cardControls = (count, controls) => {
 
     controlsWrapper.append(decrementBtn, countDisplay, incrementBtn);
 
+    // Returning an object containing countDisplay so that it can be visible in the global scope..
     return { controlsWrapper, countDisplay };
 
 }
