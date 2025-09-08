@@ -45,12 +45,13 @@ button {
 body {
   font-family: "Red Hat Text";
   font-size: 1.6rem;
+  text-align: start;
   display: flex;
   line-height: 1.5;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-  background-color: var(--Rose-50);
+  background-color: var(--Rose-100);
 }
 
 #app {
@@ -60,10 +61,25 @@ body {
   text-align: center;
 }
 
+.dessert-list-wrapper {
+  text-align: start;
+}
+
+.list-tag{
+  margin-bottom: 2.5rem;
+}
+
+.dessert-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.6rem;
+}
+
 .dessert-card {
   display: flex;
   flex-direction: column;
   gap: 3.8rem;
+  /* max-width: 35.0rem; */
 }
 
 .banner-container {
@@ -84,7 +100,7 @@ body {
 }
 
 .add-cartBtn {
-  width: 15.5rem;
+  width: 14rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -99,11 +115,10 @@ body {
 }
 
 .controls-wrapper {
-  width: 15.5rem;
+  width: 14rem;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  gap: 4.0rem;
   padding: 1.0rem ;
   border-radius: 2.5rem;
   background-color: var(--Red);
@@ -117,6 +132,7 @@ body {
   border: 0.05rem solid aliceblue;
   border-radius: 50%;
   padding: 0.5rem;
+  width: 2.5rem;
   aspect-ratio: 1 / 1;
 }
 
@@ -144,7 +160,6 @@ body {
 }
 
 .dessert-name{
-  font-size: 1.7rem;
   font-weight: 600;
   color: var(--Rose-900);
 }
@@ -153,5 +168,56 @@ body {
   font-size: 1.4rem;
   font-weight: 600;
   color: var(--Red);
+}
+
+.cart-wrapper {
+  background-color: var(--Rose-50);
+  height: fit-content;
+  padding: 1.5rem;
+  border-radius: 0.8rem;
+}
+
+.cartList-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--Red);
+  margin-bottom: 2.5rem;
+}
+
+.description {
+  color: var(--Rose-400);
+  font-weight: 700;
+}
+
+
+@media screen and (min-width: 768px) {
+  
+  #app {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 2.2rem;
+  }
+
+  .dessert-list {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .cartList-header {
+    justify-content: start;
+  }
+}
+
+
+@media screen and (min-width: 1024px) {
+
+  #app {
+    grid-template-columns: 2fr 1fr;
+  }
+
+  .dessert-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
