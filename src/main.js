@@ -5,7 +5,7 @@ import emptyCartIcon from './assets/images/illustration-empty-cart.svg'
 
 const app = document.getElementById('app');
 
-let cartList = [];
+const cartList = [];
 
 const dessertListWrapper = document.createElement('div');
 dessertListWrapper.classList.add('dessert-list-wrapper');
@@ -43,6 +43,13 @@ cartWrapper.append(cartHeader, cartItemsDisplay);
 const dessertList = document.createElement('div');
 dessertList.classList.add('dessert-list');
 
+app.addEventListener('add-cart', parentEventHandler);
+
+app.addEventListener('reduce-count', parentEventHandler);
+
+app.addEventListener('increase-count', parentEventHandler);
+
+
 dessertData.forEach(dessert => {
   const card = dessertCard(dessert);
 
@@ -70,6 +77,46 @@ function createEmptyCart() {
   contentWrapper.append(illustration, description);
 
   return contentWrapper;
+}
+
+function updateCart(cartItem) {
+  const existing = cartList.find(item => item.name === cartItem.name);
+
+  if (existing) {
+    if (cartItem.count === 0) {
+      // Remove item
+      const index = cartList.findIndex(item => item.name === cartItem.name);
+      cartList.splice(index, 1);
+    } else {
+      // Update Count
+      existing.count = cartItem.count;
+    }
+  } else if (cartItem.count > 0) {
+    // Add new item
+    cartList.push(cartItem);
+  }
+}
+
+function calculateItemsCount(display, myArray) {
+  display.textContent = myArray.reduce((accumulator, currentValue) => accumulator + currentValue.count, 0);
+}
+
+
+function createCartItem(name, price, count) {
+  const cartItem = {
+    name,
+    price,
+    count
+  };
+
+  return cartItem;
+}
+
+function parentEventHandler(ev) {
+  const item = createCartItem(ev.detail.name, ev.detail.price, ev.detail.value);
+
+  updateCart(item)
+  calculateItemsCount(cartCount, cartList);
 }
 
 

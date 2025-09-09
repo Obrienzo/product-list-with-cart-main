@@ -58,7 +58,9 @@ body {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
-  text-align: center;
+  display: grid;
+  grid-template-columns: 1f;
+  gap: 2.2rem;
 }
 
 .dessert-list-wrapper {
@@ -195,9 +197,7 @@ body {
 @media screen and (min-width: 768px) {
   
   #app {
-    display: grid;
     grid-template-columns: 1.5fr 1fr;
-    gap: 2.2rem;
   }
 
   .dessert-list {

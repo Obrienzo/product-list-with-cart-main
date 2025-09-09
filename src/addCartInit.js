@@ -1,6 +1,6 @@
 import cartIcon from './assets/images/icon-add-to-cart.svg';
 
-const createCartButton = (count, addCartActive) => {
+const createCartButton = (count, addCartActive, object) => {
 
     const cartButton = document.createElement('button');
     cartButton.classList.add('add-cartBtn');
@@ -19,11 +19,18 @@ const createCartButton = (count, addCartActive) => {
         of the add button element...
     */
     cartButton.addEventListener('click', () => {
-        count.value++
+        count.value++;
+
         cartButton.dispatchEvent(new CustomEvent("add-cart", {
-            detail: { value: count.value, addCartActive: false },
+            detail: { 
+                value: count.value,
+                name: object.name,
+                price: object.price,
+                addCartActive: false 
+            },
             bubbles: true
-        }))
+        }));
+        
     });
 
     cartButton.append(icon, buttonSpan);

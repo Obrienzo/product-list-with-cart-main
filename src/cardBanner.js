@@ -24,8 +24,8 @@ const createBannerWrapper = (object) => {
     const buttonsWrapper = document.createElement('div');
     buttonsWrapper.classList.add('btns-wrapper');
 
-    const addCartButton = createCartButton(count, addCartActive, object.name);
-    const { controlsWrapper: itemControls, countDisplay} = createControls(count, controls, object.name); // implementing destructuring to expose the value of the count display element to the parent wrapper...
+    const addCartButton = createCartButton(count, addCartActive, object);
+    const { controlsWrapper: itemControls, countDisplay} = createControls(count, controls, object); // implementing destructuring to expose the value of the count display element to the parent wrapper...
 
     buttonsWrapper.append(addCartButton,itemControls);
 
