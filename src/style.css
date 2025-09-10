@@ -109,11 +109,17 @@ body {
   gap: 0.5rem;
   padding: 1.0rem 2.0rem;
   border-radius: 2.5rem;
-  border: 0.15rem solid var(--Rose-400);
+  border: 0.16rem solid var(--Rose-400);
   background-color: var(--Rose-50);
   color: var(--Rose-900);
   font-weight: 600;
   font-size: 1.3rem;
+  transition: all 180ms ease-in-out;
+}
+
+.add-cartBtn:hover {
+  color: var(--Red);
+  border-color: var(--Red);
 }
 
 .controls-wrapper {
@@ -175,7 +181,7 @@ body {
 .cart-wrapper {
   background-color: var(--Rose-50);
   height: fit-content;
-  padding: 1.5rem;
+  padding: 1.8rem;
   border-radius: 0.8rem;
 }
 
@@ -188,9 +194,113 @@ body {
   margin-bottom: 2.5rem;
 }
 
+.cart-count {
+  font-size: 2.0rem;
+  font-weight: 700;
+}
+
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .description {
   color: var(--Rose-400);
   font-weight: 700;
+}
+
+.total-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1.6rem 0;
+}
+
+.total-price {
+  color: var(--Rose-900);
+  font-weight: 700;
+  font-size: 2.0rem;
+}
+
+.products-tag {
+  background-color: var(--Rose-100);
+  border-radius: 0.8rem;
+  display: flex;
+  gap: 0.8rem;
+  justify-content: center;
+  padding: 1.5rem;
+  font-size: 1.4rem;
+}
+
+.confirm-btn {
+  display: block;
+  width: 100%;
+  margin-top: 1.6rem;
+  background-color: var(--Red);
+  color: var(--Rose-50);
+  padding: 1.5rem;
+  border-radius: 2.5rem;
+}
+
+.cartItem-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.6rem;
+  border-bottom: 0.05rem solid var(--Rose-100);
+  padding: 1.2rem 0;
+}
+
+.detail-wrapper {
+  flex-grow: 1;
+}
+
+.data-container {
+  font-size: 1.4rem;
+  display: flex;
+  align-items: baseline;
+  gap: 1.2rem;
+  margin-top: 0.8rem;
+}
+
+.dessert-name {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.dessert-count {
+  color: var(--Red);
+  font-weight: 600;
+}
+
+.dessert-price {
+  color: var(--Rose-300);
+  font-weight: 400;
+}
+
+.dessert-total {
+  color: var(--Rose-500);
+  font-weight: 600;
+}
+
+.delete-item {
+  border: 0.2rem solid var(--Rose-300);
+  padding: 0.5rem;
+  width: 2.4rem;
+  height: 2.4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+.delete-item:hover {
+  border-color: var(--Rose-900);
+  svg {
+    fill: var(--Rose-900);
+  }
 }
 
 

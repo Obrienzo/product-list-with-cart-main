@@ -62,8 +62,7 @@ const createControls = (count, controls, object) => {
             detail: { 
                 value: count.value,
                 name: object.name,
-                price: object.price,
-                itemsNumber: count.value, 
+                price: object.price
             },
             bubbles: true,
         }));

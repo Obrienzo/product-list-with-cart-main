@@ -8,7 +8,6 @@ const createBannerWrapper = (object) => {
     let count = {value: 0};
     let addCartActive = true;
     let controls = false;
-    const dessertOjbect = {};
 
     const bannerContainer = document.createElement('div');
     bannerContainer.classList.add('banner-container');
