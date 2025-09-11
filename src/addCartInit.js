@@ -24,6 +24,7 @@ const createCartButton = (count, addCartActive, object) => {
         cartButton.dispatchEvent(new CustomEvent("add-cart", {
             detail: { 
                 value: count.value,
+                thumbnail: object.image.thumbnail,
                 name: object.name,
                 price: object.price,
                 addCartActive: false 

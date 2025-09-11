@@ -36,6 +36,7 @@ const createControls = (count, controls, object) => {
         decrementBtn.dispatchEvent(new CustomEvent('reduce-count', {
             detail: { 
                 value: count.value,
+                thumbnail: object.image.thumbnail,
                 name: object.name,
                 price: object.price 
             },
@@ -46,6 +47,7 @@ const createControls = (count, controls, object) => {
                 decrementBtn.dispatchEvent(new CustomEvent('initialize-card', {
                     detail: { 
                         value: count.value,
+                        thumbnail: object.image.thumbnail,
                         name: object.name,
                         price: object.price,  
                         controls: true 
