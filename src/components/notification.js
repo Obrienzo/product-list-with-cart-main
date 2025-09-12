@@ -1,4 +1,4 @@
-import { calculateCartTotal } from "./main";
+import { calculateCartTotal } from "../main";
 import createCartItemCard from "./cartItemCard";
 
 const createOrderConfirmation = (myArray) => {

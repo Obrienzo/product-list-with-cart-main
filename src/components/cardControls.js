@@ -1,5 +1,5 @@
-import plusSign from './assets/images/icon-increment-quantity.svg'
-import minusSign from './assets/images/icon-decrement-quantity.svg'
+import plusSign from '../assets/images/icon-increment-quantity.svg'
+import minusSign from '../assets/images/icon-decrement-quantity.svg'
 
 const createControls = (count, controls, object) => {
 

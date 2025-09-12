@@ -1,9 +1,9 @@
 import './style.css'
 import dessertData from '/data.json';
-import dessertCard from './dessertCard';
+import dessertCard from './components/dessertCard';
 import emptyCartIcon from './assets/images/illustration-empty-cart.svg';
-import createCartItemCard from './cartItemCard';
-import createOrderConfirmation from './notification'; 
+import createCartItemCard from './components/cartItemCard';
+import createOrderConfirmation from './components/notification'; 
 
 const app = document.getElementById('app');
 const appContent = document.createElement('div');

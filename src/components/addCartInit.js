@@ -1,4 +1,4 @@
-import cartIcon from './assets/images/icon-add-to-cart.svg';
+import cartIcon from '../assets/images/icon-add-to-cart.svg';
 
 const createCartButton = (count, addCartActive, object) => {
 
