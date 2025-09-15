@@ -1,5 +1,5 @@
-import plusSign from './assets/images/icon-increment-quantity.svg'
-import minusSign from './assets/images/icon-decrement-quantity.svg'
+import plusSign from '../assets/images/icon-increment-quantity.svg'
+import minusSign from '../assets/images/icon-decrement-quantity.svg'
 
 const createControls = (count, controls, object) => {
 
@@ -36,6 +36,7 @@ const createControls = (count, controls, object) => {
         decrementBtn.dispatchEvent(new CustomEvent('reduce-count', {
             detail: { 
                 value: count.value,
+                thumbnail: object.image.thumbnail,
                 name: object.name,
                 price: object.price 
             },
@@ -46,6 +47,7 @@ const createControls = (count, controls, object) => {
                 decrementBtn.dispatchEvent(new CustomEvent('initialize-card', {
                     detail: { 
                         value: count.value,
+                        thumbnail: object.image.thumbnail,
                         name: object.name,
                         price: object.price,  
                         controls: true 
@@ -62,8 +64,7 @@ const createControls = (count, controls, object) => {
             detail: { 
                 value: count.value,
                 name: object.name,
-                price: object.price,
-                itemsNumber: count.value, 
+                price: object.price
             },
             bubbles: true,
         }));

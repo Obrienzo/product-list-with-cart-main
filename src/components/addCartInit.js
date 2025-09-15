@@ -1,4 +1,4 @@
-import cartIcon from './assets/images/icon-add-to-cart.svg';
+import cartIcon from '../assets/images/icon-add-to-cart.svg';
 
 const createCartButton = (count, addCartActive, object) => {
 
@@ -24,6 +24,7 @@ const createCartButton = (count, addCartActive, object) => {
         cartButton.dispatchEvent(new CustomEvent("add-cart", {
             detail: { 
                 value: count.value,
+                thumbnail: object.image.thumbnail,
                 name: object.name,
                 price: object.price,
                 addCartActive: false 
