@@ -40,6 +40,16 @@ const createOrderConfirmation = (myArray) => {
     refreshBtn.classList.add('btn', 'refresh-btn');
     refreshBtn.textContent = 'Start New Order';
 
+    refreshBtn.addEventListener("click", () => {
+        console.log("clicked");
+        refreshBtn.dispatchEvent(new CustomEvent("refresh-selection", {
+            detail: {
+                value: "Reset the Order for a new selection"
+            }, 
+            bubbles: true
+        })); // Needing function review for next time....
+    })
+
     notificationWrapper.append(notificationHeader, notificationContent, refreshBtn);
 
     outerWrapper.appendChild(notificationWrapper);
