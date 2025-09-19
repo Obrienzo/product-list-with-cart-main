@@ -191,6 +191,8 @@ function updateCartDisplayUi() {
     confirmBtn.textContent = "Confirm Order";
 
     confirmBtn.addEventListener('click', () => {
+      document.body.classList.add("floater");
+
       confirmBtn.dispatchEvent(new CustomEvent("confirm-order", {
         detail: {
           value: cartList
