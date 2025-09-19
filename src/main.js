@@ -74,7 +74,7 @@ document.body.addEventListener('confirm-order', (ev) => {
 
 document.addEventListener("refresh-selection", (ev) => {
   window.location.reload();
-}) // To comeback later on this function of how to restart the new order....
+});
 
 
 appContent.append(dessertListWrapper, cartWrapper);

@@ -47,7 +47,7 @@ const createOrderConfirmation = (myArray) => {
                 value: "Reset the Order for a new selection"
             }, 
             bubbles: true
-        })); // Needing function review for next time....
+        }))
     })
 
     notificationWrapper.append(notificationHeader, notificationContent, refreshBtn);
