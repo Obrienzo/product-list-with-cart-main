@@ -159,9 +159,9 @@ function createCartObject(name, price, count, thumbnail) {
 function parentEventHandler(ev) {
   const item = createCartObject(ev.detail.name, ev.detail.price, ev.detail.value, ev.detail.thumbnail);
 
-  updateCart(item)
-  calculateItemsCount(cartCount, cartList);
-  updateCartDisplayUi();
+  updateCart(item); // Code at line 111...
+  calculateItemsCount(cartCount, cartList); // Code at line 134...
+  updateCartDisplayUi(); // Code at line 173... 
 
 }
 
